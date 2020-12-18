@@ -22,52 +22,52 @@ interface BytesProperties {
     base?: number;
 }
 /**
- * Formats the contents of fields, rows, and data volumes in a human-friendly format.
+ * Formats field content, price and data volume into human-readable format.
  */
 declare class Format {
     /**
-     * Formats the card number in a human-readable format.
+     * Formats the card into a human-readable format.
      *
      * @param target
      */
     static card(target: Target): void;
     /**
-     * Formats the phone number in a human-readable format.
+     * Formats the phone into a human-readable format.
      *
      * @param target
      * @param properties
      */
     static phone(target: Target, properties?: PhoneProperties): void;
     /**
-     * Formats the date in a human-readable format.
+     * Formats a date into a human-readable format.
      *
      * @param target
      * @param properties
      */
     static date(target: Target, properties?: DateProperties): void;
     /**
-     * Formats the time in a human-readable format.
+     * Formats time into human-readable format.
      *
      * @param target
      * @param properties
      */
     static time(target: Target, properties?: TimeProperties): void;
     /**
-     * Formats a number in a human-readable format.
+     * Formats a number into human-readable format.
      *
      * @param target
      * @param properties
      */
     static number(target: Target, properties?: NumberProperties): void;
     /**
-     * Formats the price in a human-readable format.
+     * Formats the price into a human-readable format.
      *
      * @param string
      * @param properties
      */
     static price(string: string, properties?: PriceProperties): string;
     /**
-     * Formats bytes to a human-readable format.
+     * Formats bytes into human-readable format.
      *
      * @param bytes
      * @param properties

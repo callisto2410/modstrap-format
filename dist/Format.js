@@ -5,11 +5,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const cleave_js_1 = __importDefault(require("cleave.js"));
 /**
- * Formats the contents of fields, rows, and data volumes in a human-friendly format.
+ * Formats field content, price and data volume into human-readable format.
  */
 class Format {
     /**
-     * Formats the card number in a human-readable format.
+     * Formats the card into a human-readable format.
      *
      * @param target
      */
@@ -24,7 +24,7 @@ class Format {
         }
     }
     /**
-     * Formats the phone number in a human-readable format.
+     * Formats the phone into a human-readable format.
      *
      * @param target
      * @param properties
@@ -44,7 +44,7 @@ class Format {
         }
     }
     /**
-     * Formats the date in a human-readable format.
+     * Formats a date into a human-readable format.
      *
      * @param target
      * @param properties
@@ -63,7 +63,7 @@ class Format {
         }
     }
     /**
-     * Formats the time in a human-readable format.
+     * Formats time into human-readable format.
      *
      * @param target
      * @param properties
@@ -81,7 +81,7 @@ class Format {
         }
     }
     /**
-     * Formats a number in a human-readable format.
+     * Formats a number into human-readable format.
      *
      * @param target
      * @param properties
@@ -100,7 +100,7 @@ class Format {
         }
     }
     /**
-     * Formats the price in a human-readable format.
+     * Formats the price into a human-readable format.
      *
      * @param string
      * @param properties
@@ -110,7 +110,7 @@ class Format {
         return string.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1' + ((_a = properties.delimiter) !== null && _a !== void 0 ? _a : ' '));
     }
     /**
-     * Formats bytes to a human-readable format.
+     * Formats bytes into human-readable format.
      *
      * @param bytes
      * @param properties
