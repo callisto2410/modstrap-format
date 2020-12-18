@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "incremental": true,
+    "target": "ES2019",
+    "strict": true
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "name": "@modstrap/format",
+  "version": "1.0.0",
+  "description": "Formats field content, price and data volume into human-readable format.",
+  "main": "dist/Format.js",
+  "types": "dist/Format.d.ts",
+  "author": "Callisto (https://github.com/callisto2410)",
+  "license": "MIT",
+  "homepage": "https://github.com/callisto2410/modstrap-format",
+  "bugs": {
+    "url": "https://github.com/callisto2410/modstrap-format/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/callisto2410/modstrap-format.git"
+  },
+  "scripts": {
+    "build": "npm run build:clean && npm run build:production && npm run build:demo",
+    "build:production": "tsc --project tsconfig.json",
+    "build:demo": "webpack --config webpack.config.js",
+    "build:demo:watch": "webpack --watch --config webpack.config.js",
+    "build:clean": "npx rimraf .cache dist *.tgz",
+    "build:pack": "npm run build:clean && npm run build:production && npm pack"
+  },
+  "devDependencies": {
+    "@types/cleave.js": "^1.4.4",
+    "@types/node": "^14.10.1",
+    "autoprefixer": "^10.0.4",
+    "css-loader": "^5.0.1",
+    "postcss-loader": "^4.0.1",
+    "rimraf": "^3.0.2",
+    "sass": "^1.30.0",
+    "sass-loader": "^10.0.2",
+    "style-loader": "^2.0.0",
+    "ts-loader": "^8.0.4",
+    "typescript": "^4.0.2",
+    "webpack": "^5.10.0",
+    "webpack-cli": "^4.2.0"
+  },
+  "dependencies": {
+    "cleave.js": "^1.6.0"
+  }
+}
