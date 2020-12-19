@@ -1,7 +1,5 @@
 import Cleave from 'cleave.js';
 
-type Target = string;
-
 interface PhoneProperties {
     prefix?: string;
     blocks?: number[];
@@ -29,6 +27,8 @@ interface PriceProperties {
 interface BytesProperties {
     base?: number;
 }
+
+type Target = string;
 
 /**
  * Formats field content, price and data volume into human-readable format.
