@@ -5,60 +5,72 @@ interface PhoneProperties {
 }
 interface DateProperties {
     delimiter?: string;
-    pattern?: string[];
+    datePattern?: string[];
 }
 interface TimeProperties {
-    pattern?: string[];
+    timePattern?: string[];
 }
 interface NumberProperties {
     delimiter?: string;
-    style?: 'lakh' | 'thousand' | 'wan' | 'none';
+    numeralThousandsGroupStyle?: 'lakh' | 'thousand' | 'wan' | 'none';
 }
 interface PriceProperties {
     delimiter?: string;
 }
 interface BytesProperties {
-    base?: number;
+    fraction?: number;
 }
-declare type Target = string;
+declare type Selector = string;
 /**
  * Formats field content, price and data volume into human-readable format.
+ *
+ * @see card
+ * @see phone
+ * @see date
+ * @see time
+ * @see number
+ * @see price
+ * @see bytes
  */
 declare class Format {
+    private static phoneProperties;
+    private static dateProperties;
+    private static timeProperties;
+    private static numberProperties;
     /**
      * Formats the card into a human-readable format.
      *
-     * @param target
+     * @param selector
      */
-    static card(target: Target): void;
+    static card(selector: Selector): void;
     /**
      * Formats the phone into a human-readable format.
      *
-     * @param target
+     * @param selector
      * @param properties
      */
-    static phone(target: Target, properties?: PhoneProperties): void;
+    static phone(selector: Selector, properties?: PhoneProperties): void;
     /**
      * Formats a date into a human-readable format.
      *
-     * @param target
+     * @param selector
      * @param properties
      */
-    static date(target: Target, properties?: DateProperties): void;
+    static date(selector: Selector, properties?: DateProperties): void;
     /**
      * Formats time into human-readable format.
      *
-     * @param target
+     * @param selector
      * @param properties
      */
-    static time(target: Target, properties?: TimeProperties): void;
+    static time(selector: Selector, properties?: TimeProperties): void;
     /**
      * Formats a number into human-readable format.
      *
-     * @param target
+     * @param selector
      * @param properties
      */
-    static number(target: Target, properties?: NumberProperties): void;
+    static number(selector: Selector, properties?: NumberProperties): void;
     /**
      * Formats the price into a human-readable format.
      *

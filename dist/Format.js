@@ -6,18 +6,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const cleave_js_1 = __importDefault(require("cleave.js"));
 /**
  * Formats field content, price and data volume into human-readable format.
+ *
+ * @see card
+ * @see phone
+ * @see date
+ * @see time
+ * @see number
+ * @see price
+ * @see bytes
  */
 class Format {
     /**
      * Formats the card into a human-readable format.
      *
-     * @param target
+     * @param selector
      */
-    static card(target) {
-        const elements = document.querySelectorAll(target);
+    static card(selector) {
+        const elements = document.querySelectorAll(selector);
         for (const element of elements) {
-            if (!(element instanceof HTMLInputElement))
-                continue;
             new cleave_js_1.default(element, {
                 creditCard: true,
             });
@@ -26,77 +32,49 @@ class Format {
     /**
      * Formats the phone into a human-readable format.
      *
-     * @param target
+     * @param selector
      * @param properties
      */
-    static phone(target, properties = {}) {
-        var _a, _b, _c;
-        const elements = document.querySelectorAll(target);
+    static phone(selector, properties = {}) {
+        const elements = document.querySelectorAll(selector);
         for (const element of elements) {
-            if (!(element instanceof HTMLInputElement))
-                continue;
-            new cleave_js_1.default(element, {
-                numericOnly: true,
-                prefix: (_a = properties.prefix) !== null && _a !== void 0 ? _a : '+7',
-                blocks: (_b = properties.blocks) !== null && _b !== void 0 ? _b : [2, 3, 3, 2, 2],
-                delimiters: (_c = properties.delimiters) !== null && _c !== void 0 ? _c : [' (', ') ', '-', '-'],
-            });
+            new cleave_js_1.default(element, Object.assign(Object.assign({ numericOnly: true }, this.phoneProperties), properties));
         }
     }
     /**
      * Formats a date into a human-readable format.
      *
-     * @param target
+     * @param selector
      * @param properties
      */
-    static date(target, properties = {}) {
-        var _a, _b;
-        const elements = document.querySelectorAll(target);
+    static date(selector, properties = {}) {
+        const elements = document.querySelectorAll(selector);
         for (const element of elements) {
-            if (!(element instanceof HTMLInputElement))
-                continue;
-            new cleave_js_1.default(element, {
-                date: true,
-                delimiter: (_a = properties.delimiter) !== null && _a !== void 0 ? _a : '-',
-                datePattern: (_b = properties.pattern) !== null && _b !== void 0 ? _b : ['d', 'm', 'Y'],
-            });
+            new cleave_js_1.default(element, Object.assign(Object.assign({ date: true }, this.dateProperties), properties));
         }
     }
     /**
      * Formats time into human-readable format.
      *
-     * @param target
+     * @param selector
      * @param properties
      */
-    static time(target, properties = {}) {
-        var _a;
-        const elements = document.querySelectorAll(target);
+    static time(selector, properties = {}) {
+        const elements = document.querySelectorAll(selector);
         for (const element of elements) {
-            if (!(element instanceof HTMLInputElement))
-                continue;
-            new cleave_js_1.default(element, {
-                time: true,
-                timePattern: (_a = properties.pattern) !== null && _a !== void 0 ? _a : ['h', 'm'],
-            });
+            new cleave_js_1.default(element, Object.assign(Object.assign({ time: true }, this.timeProperties), properties));
         }
     }
     /**
      * Formats a number into human-readable format.
      *
-     * @param target
+     * @param selector
      * @param properties
      */
-    static number(target, properties = {}) {
-        var _a, _b;
-        const elements = document.querySelectorAll(target);
+    static number(selector, properties = {}) {
+        const elements = document.querySelectorAll(selector);
         for (const element of elements) {
-            if (!(element instanceof HTMLInputElement))
-                continue;
-            new cleave_js_1.default(element, {
-                numeral: true,
-                delimiter: (_a = properties.delimiter) !== null && _a !== void 0 ? _a : ' ',
-                numeralThousandsGroupStyle: (_b = properties.style) !== null && _b !== void 0 ? _b : 'thousand',
-            });
+            new cleave_js_1.default(element, Object.assign(Object.assign({ numeral: true }, this.numberProperties), properties));
         }
     }
     /**
@@ -122,7 +100,23 @@ class Format {
         const factor = 1024;
         const suffix = [' B', ' KB', ' MB', ' GB', ' TB', ' PB', ' EB', ' ZB', ' YB'];
         const index = Math.floor(Math.log(bytes) / Math.log(factor));
-        return (bytes / Math.pow(factor, index)).toFixed((_a = properties.base) !== null && _a !== void 0 ? _a : 2) + suffix[index];
+        return (bytes / Math.pow(factor, index)).toFixed((_a = properties.fraction) !== null && _a !== void 0 ? _a : 2) + suffix[index];
     }
 }
+Format.phoneProperties = {
+    prefix: '+7',
+    blocks: [2, 3, 3, 2, 2],
+    delimiters: [' (', ') ', '-', '-'],
+};
+Format.dateProperties = {
+    delimiter: '-',
+    datePattern: ['d', 'm', 'Y'],
+};
+Format.timeProperties = {
+    timePattern: ['h', 'm'],
+};
+Format.numberProperties = {
+    delimiter: ' ',
+    numeralThousandsGroupStyle: 'thousand',
+};
 exports.default = Format;

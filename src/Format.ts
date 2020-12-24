@@ -8,16 +8,16 @@ interface PhoneProperties {
 
 interface DateProperties {
     delimiter?: string;
-    pattern?: string[];
+    datePattern?: string[];
 }
 
 interface TimeProperties {
-    pattern?: string[];
+    timePattern?: string[];
 }
 
 interface NumberProperties {
     delimiter?: string;
-    style?: 'lakh' | 'thousand' | 'wan' | 'none';
+    numeralThousandsGroupStyle?: 'lakh' | 'thousand' | 'wan' | 'none';
 }
 
 interface PriceProperties {
@@ -25,26 +25,52 @@ interface PriceProperties {
 }
 
 interface BytesProperties {
-    base?: number;
+    fraction?: number;
 }
 
-type Target = string;
+type Selector = string;
 
 /**
  * Formats field content, price and data volume into human-readable format.
+ *
+ * @see card
+ * @see phone
+ * @see date
+ * @see time
+ * @see number
+ * @see price
+ * @see bytes
  */
 class Format {
+    private static phoneProperties: PhoneProperties = {
+        prefix: '+7',
+        blocks: [2, 3, 3, 2, 2],
+        delimiters: [' (', ') ', '-', '-'],
+    }
+
+    private static dateProperties: DateProperties = {
+        delimiter: '-',
+        datePattern: ['d', 'm', 'Y'],
+    }
+
+    private static timeProperties: TimeProperties = {
+        timePattern: ['h', 'm'],
+    }
+
+    private static numberProperties: NumberProperties = {
+        delimiter: ' ',
+        numeralThousandsGroupStyle: 'thousand',
+    }
+
     /**
      * Formats the card into a human-readable format.
      *
-     * @param target
+     * @param selector
      */
-    static card(target: Target): void {
-        const elements = document.querySelectorAll(target);
+    static card(selector: Selector): void {
+        const elements = document.querySelectorAll(selector) as NodeListOf<HTMLElement>;
 
         for (const element of elements) {
-            if (!(element instanceof HTMLInputElement)) continue;
-
             new Cleave(element, {
                 creditCard: true,
             });
@@ -54,20 +80,17 @@ class Format {
     /**
      * Formats the phone into a human-readable format.
      *
-     * @param target
+     * @param selector
      * @param properties
      */
-    static phone(target: Target, properties: PhoneProperties = {}): void {
-        const elements = document.querySelectorAll(target);
+    static phone(selector: Selector, properties: PhoneProperties = {}): void {
+        const elements = document.querySelectorAll(selector) as NodeListOf<HTMLElement>;
 
         for (const element of elements) {
-            if (!(element instanceof HTMLInputElement)) continue;
-
             new Cleave(element, {
                 numericOnly: true,
-                prefix: properties.prefix ?? '+7',
-                blocks: properties.blocks ?? [2, 3, 3, 2, 2],
-                delimiters: properties.delimiters ?? [' (', ') ', '-', '-'],
+                ...this.phoneProperties,
+                ...properties,
             });
         }
     }
@@ -75,19 +98,17 @@ class Format {
     /**
      * Formats a date into a human-readable format.
      *
-     * @param target
+     * @param selector
      * @param properties
      */
-    static date(target: Target, properties: DateProperties = {}): void {
-        const elements = document.querySelectorAll(target);
+    static date(selector: Selector, properties: DateProperties = {}): void {
+        const elements = document.querySelectorAll(selector) as NodeListOf<HTMLElement>;
 
         for (const element of elements) {
-            if (!(element instanceof HTMLInputElement)) continue;
-
             new Cleave(element, {
                 date: true,
-                delimiter: properties.delimiter ?? '-',
-                datePattern: properties.pattern ?? ['d', 'm', 'Y'],
+                ...this.dateProperties,
+                ...properties,
             });
         }
     }
@@ -95,18 +116,17 @@ class Format {
     /**
      * Formats time into human-readable format.
      *
-     * @param target
+     * @param selector
      * @param properties
      */
-    static time(target: Target, properties: TimeProperties = {}): void {
-        const elements = document.querySelectorAll(target);
+    static time(selector: Selector, properties: TimeProperties = {}): void {
+        const elements = document.querySelectorAll(selector) as NodeListOf<HTMLElement>;
 
         for (const element of elements) {
-            if (!(element instanceof HTMLInputElement)) continue;
-
             new Cleave(element, {
                 time: true,
-                timePattern: properties.pattern ?? ['h', 'm'],
+                ...this.timeProperties,
+                ...properties,
             });
         }
     }
@@ -114,19 +134,17 @@ class Format {
     /**
      * Formats a number into human-readable format.
      *
-     * @param target
+     * @param selector
      * @param properties
      */
-    static number(target: Target, properties: NumberProperties = {}): void {
-        const elements = document.querySelectorAll(target);
+    static number(selector: Selector, properties: NumberProperties = {}): void {
+        const elements = document.querySelectorAll(selector) as NodeListOf<HTMLElement>;
 
         for (const element of elements) {
-            if (!(element instanceof HTMLInputElement)) continue;
-
             new Cleave(element, {
                 numeral: true,
-                delimiter: properties.delimiter ?? ' ',
-                numeralThousandsGroupStyle: properties.style ?? 'thousand',
+                ...this.numberProperties,
+                ...properties,
             });
         }
     }
@@ -154,7 +172,7 @@ class Format {
         const suffix = [' B', ' KB', ' MB', ' GB', ' TB', ' PB', ' EB', ' ZB', ' YB'];
         const index = Math.floor(Math.log(bytes) / Math.log(factor));
 
-        return (bytes / Math.pow(factor, index)).toFixed(properties.base ?? 2) + suffix[index];
+        return (bytes / Math.pow(factor, index)).toFixed(properties.fraction ?? 2) + suffix[index];
     }
 }
 

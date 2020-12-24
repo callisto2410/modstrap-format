@@ -2,11 +2,8 @@ import './index.scss';
 
 import Format from '../../src/Format';
 
-const price = document.querySelector('.price');
-if (!price) throw new Error('Element ".price" is "undefined".');
-
-const bytes = document.querySelector('.bytes');
-if (!bytes) throw new Error('Element ".bytes" is "undefined".');
+const price = document.querySelector('.price')!;
+const bytes = document.querySelector('.bytes')!;
 
 /* Fields. */
 Format.card('[data-format-card]');
