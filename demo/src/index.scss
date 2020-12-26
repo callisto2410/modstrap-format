@@ -78,4 +78,9 @@ article {
 /* Other. */
 .other {
   @extend %grid;
+
+  .price,
+  .bytes {
+    font: 14px 'Arial';
+  }
 }
