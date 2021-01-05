@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Format = void 0;
 const cleave_js_1 = __importDefault(require("cleave.js"));
 /**
  * Formats field content, price and data volume into human-readable format.
@@ -38,7 +39,11 @@ class Format {
     static phone(selector, properties = {}) {
         const elements = document.querySelectorAll(selector);
         for (const element of elements) {
-            new cleave_js_1.default(element, Object.assign(Object.assign({ numericOnly: true }, this.phoneProperties), properties));
+            new cleave_js_1.default(element, {
+                numericOnly: true,
+                ...this.phoneProperties,
+                ...properties,
+            });
         }
     }
     /**
@@ -50,7 +55,11 @@ class Format {
     static date(selector, properties = {}) {
         const elements = document.querySelectorAll(selector);
         for (const element of elements) {
-            new cleave_js_1.default(element, Object.assign(Object.assign({ date: true }, this.dateProperties), properties));
+            new cleave_js_1.default(element, {
+                date: true,
+                ...this.dateProperties,
+                ...properties,
+            });
         }
     }
     /**
@@ -62,7 +71,11 @@ class Format {
     static time(selector, properties = {}) {
         const elements = document.querySelectorAll(selector);
         for (const element of elements) {
-            new cleave_js_1.default(element, Object.assign(Object.assign({ time: true }, this.timeProperties), properties));
+            new cleave_js_1.default(element, {
+                time: true,
+                ...this.timeProperties,
+                ...properties,
+            });
         }
     }
     /**
@@ -74,7 +87,11 @@ class Format {
     static number(selector, properties = {}) {
         const elements = document.querySelectorAll(selector);
         for (const element of elements) {
-            new cleave_js_1.default(element, Object.assign(Object.assign({ numeral: true }, this.numberProperties), properties));
+            new cleave_js_1.default(element, {
+                numeral: true,
+                ...this.numberProperties,
+                ...properties,
+            });
         }
     }
     /**
@@ -85,7 +102,7 @@ class Format {
      */
     static price(string, properties = {}) {
         var _a;
-        return string.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1' + ((_a = properties.delimiter) !== null && _a !== void 0 ? _a : ' '));
+        return string.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1" + ((_a = properties.delimiter) !== null && _a !== void 0 ? _a : " "));
     }
     /**
      * Formats bytes into human-readable format.
@@ -96,27 +113,28 @@ class Format {
     static bytes(bytes = 0, properties = {}) {
         var _a;
         if (bytes === 0)
-            return '0 B';
+            return "0 B";
         const factor = 1024;
-        const suffix = [' B', ' KB', ' MB', ' GB', ' TB', ' PB', ' EB', ' ZB', ' YB'];
+        const suffix = [" B", " KB", " MB", " GB", " TB", " PB", " EB", " ZB", " YB"];
         const index = Math.floor(Math.log(bytes) / Math.log(factor));
         return (bytes / Math.pow(factor, index)).toFixed((_a = properties.fraction) !== null && _a !== void 0 ? _a : 2) + suffix[index];
     }
 }
+exports.Format = Format;
 Format.phoneProperties = {
-    prefix: '+7',
+    prefix: "+7",
     blocks: [2, 3, 3, 2, 2],
-    delimiters: [' (', ') ', '-', '-'],
+    delimiters: [" (", ") ", "-", "-"],
 };
 Format.dateProperties = {
-    delimiter: '-',
-    datePattern: ['d', 'm', 'Y'],
+    delimiter: "-",
+    datePattern: ["d", "m", "Y"],
 };
 Format.timeProperties = {
-    timePattern: ['h', 'm'],
+    timePattern: ["h", "m"],
 };
 Format.numberProperties = {
-    delimiter: ' ',
-    numeralThousandsGroupStyle: 'thousand',
+    delimiter: " ",
+    numeralThousandsGroupStyle: "thousand",
 };
 exports.default = Format;

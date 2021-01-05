@@ -1,26 +1,25 @@
-interface PhoneProperties {
+export interface FormatPhoneProperties {
     prefix?: string;
     blocks?: number[];
     delimiters?: string[];
 }
-interface DateProperties {
+export interface FormatDateProperties {
     delimiter?: string;
     datePattern?: string[];
 }
-interface TimeProperties {
+export interface FormatTimeProperties {
     timePattern?: string[];
 }
-interface NumberProperties {
+export interface FormatNumberProperties {
     delimiter?: string;
-    numeralThousandsGroupStyle?: 'lakh' | 'thousand' | 'wan' | 'none';
+    numeralThousandsGroupStyle?: "lakh" | "thousand" | "wan" | "none";
 }
-interface PriceProperties {
+export interface FormatPriceProperties {
     delimiter?: string;
 }
-interface BytesProperties {
+export interface FormatBytesProperties {
     fraction?: number;
 }
-declare type Selector = string;
 /**
  * Formats field content, price and data volume into human-readable format.
  *
@@ -32,7 +31,7 @@ declare type Selector = string;
  * @see price
  * @see bytes
  */
-declare class Format {
+export declare class Format {
     private static phoneProperties;
     private static dateProperties;
     private static timeProperties;
@@ -42,48 +41,48 @@ declare class Format {
      *
      * @param selector
      */
-    static card(selector: Selector): void;
+    static card(selector: string): void;
     /**
      * Formats the phone into a human-readable format.
      *
      * @param selector
      * @param properties
      */
-    static phone(selector: Selector, properties?: PhoneProperties): void;
+    static phone(selector: string, properties?: FormatPhoneProperties): void;
     /**
      * Formats a date into a human-readable format.
      *
      * @param selector
      * @param properties
      */
-    static date(selector: Selector, properties?: DateProperties): void;
+    static date(selector: string, properties?: FormatDateProperties): void;
     /**
      * Formats time into human-readable format.
      *
      * @param selector
      * @param properties
      */
-    static time(selector: Selector, properties?: TimeProperties): void;
+    static time(selector: string, properties?: FormatTimeProperties): void;
     /**
      * Formats a number into human-readable format.
      *
      * @param selector
      * @param properties
      */
-    static number(selector: Selector, properties?: NumberProperties): void;
+    static number(selector: string, properties?: FormatNumberProperties): void;
     /**
      * Formats the price into a human-readable format.
      *
      * @param string
      * @param properties
      */
-    static price(string: string, properties?: PriceProperties): string;
+    static price(string: string, properties?: FormatPriceProperties): string;
     /**
      * Formats bytes into human-readable format.
      *
      * @param bytes
      * @param properties
      */
-    static bytes(bytes?: number, properties?: BytesProperties): string;
+    static bytes(bytes?: number, properties?: FormatBytesProperties): string;
 }
 export default Format;

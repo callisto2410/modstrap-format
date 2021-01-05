@@ -1,34 +1,32 @@
-import Cleave from 'cleave.js';
+import Cleave from "cleave.js";
 
-interface PhoneProperties {
+export interface FormatPhoneProperties {
     prefix?: string;
     blocks?: number[];
     delimiters?: string[];
 }
 
-interface DateProperties {
+export interface FormatDateProperties {
     delimiter?: string;
     datePattern?: string[];
 }
 
-interface TimeProperties {
+export interface FormatTimeProperties {
     timePattern?: string[];
 }
 
-interface NumberProperties {
+export interface FormatNumberProperties {
     delimiter?: string;
-    numeralThousandsGroupStyle?: 'lakh' | 'thousand' | 'wan' | 'none';
+    numeralThousandsGroupStyle?: "lakh" | "thousand" | "wan" | "none";
 }
 
-interface PriceProperties {
+export interface FormatPriceProperties {
     delimiter?: string;
 }
 
-interface BytesProperties {
+export interface FormatBytesProperties {
     fraction?: number;
 }
-
-type Selector = string;
 
 /**
  * Formats field content, price and data volume into human-readable format.
@@ -41,25 +39,25 @@ type Selector = string;
  * @see price
  * @see bytes
  */
-class Format {
-    private static phoneProperties: PhoneProperties = {
-        prefix: '+7',
+export class Format {
+    private static phoneProperties: FormatPhoneProperties = {
+        prefix: "+7",
         blocks: [2, 3, 3, 2, 2],
-        delimiters: [' (', ') ', '-', '-'],
+        delimiters: [" (", ") ", "-", "-"],
     }
 
-    private static dateProperties: DateProperties = {
-        delimiter: '-',
-        datePattern: ['d', 'm', 'Y'],
+    private static dateProperties: FormatDateProperties = {
+        delimiter: "-",
+        datePattern: ["d", "m", "Y"],
     }
 
-    private static timeProperties: TimeProperties = {
-        timePattern: ['h', 'm'],
+    private static timeProperties: FormatTimeProperties = {
+        timePattern: ["h", "m"],
     }
 
-    private static numberProperties: NumberProperties = {
-        delimiter: ' ',
-        numeralThousandsGroupStyle: 'thousand',
+    private static numberProperties: FormatNumberProperties = {
+        delimiter: " ",
+        numeralThousandsGroupStyle: "thousand",
     }
 
     /**
@@ -67,7 +65,7 @@ class Format {
      *
      * @param selector
      */
-    static card(selector: Selector): void {
+    public static card(selector: string): void {
         const elements = document.querySelectorAll(selector) as NodeListOf<HTMLElement>;
 
         for (const element of elements) {
@@ -83,7 +81,7 @@ class Format {
      * @param selector
      * @param properties
      */
-    static phone(selector: Selector, properties: PhoneProperties = {}): void {
+    public static phone(selector: string, properties: FormatPhoneProperties = {}): void {
         const elements = document.querySelectorAll(selector) as NodeListOf<HTMLElement>;
 
         for (const element of elements) {
@@ -101,7 +99,7 @@ class Format {
      * @param selector
      * @param properties
      */
-    static date(selector: Selector, properties: DateProperties = {}): void {
+    public static date(selector: string, properties: FormatDateProperties = {}): void {
         const elements = document.querySelectorAll(selector) as NodeListOf<HTMLElement>;
 
         for (const element of elements) {
@@ -119,7 +117,7 @@ class Format {
      * @param selector
      * @param properties
      */
-    static time(selector: Selector, properties: TimeProperties = {}): void {
+    public static time(selector: string, properties: FormatTimeProperties = {}): void {
         const elements = document.querySelectorAll(selector) as NodeListOf<HTMLElement>;
 
         for (const element of elements) {
@@ -137,7 +135,7 @@ class Format {
      * @param selector
      * @param properties
      */
-    static number(selector: Selector, properties: NumberProperties = {}): void {
+    public static number(selector: string, properties: FormatNumberProperties = {}): void {
         const elements = document.querySelectorAll(selector) as NodeListOf<HTMLElement>;
 
         for (const element of elements) {
@@ -155,8 +153,8 @@ class Format {
      * @param string
      * @param properties
      */
-    static price(string: string, properties: PriceProperties = {}): string {
-        return string.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1' + (properties.delimiter ?? ' '));
+    public static price(string: string, properties: FormatPriceProperties = {}): string {
+        return string.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1" + (properties.delimiter ?? " "));
     }
 
     /**
@@ -165,11 +163,11 @@ class Format {
      * @param bytes
      * @param properties
      */
-    static bytes(bytes: number = 0, properties: BytesProperties = {}): string {
-        if (bytes === 0) return '0 B';
+    public static bytes(bytes: number = 0, properties: FormatBytesProperties = {}): string {
+        if (bytes === 0) return "0 B";
 
         const factor = 1024;
-        const suffix = [' B', ' KB', ' MB', ' GB', ' TB', ' PB', ' EB', ' ZB', ' YB'];
+        const suffix = [" B", " KB", " MB", " GB", " TB", " PB", " EB", " ZB", " YB"];
         const index = Math.floor(Math.log(bytes) / Math.log(factor));
 
         return (bytes / Math.pow(factor, index)).toFixed(properties.fraction ?? 2) + suffix[index];

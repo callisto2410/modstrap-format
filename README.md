@@ -19,7 +19,7 @@ npm i https://github.com/callisto2410/modstrap-format.git
 ## Usage
 
 ```ts
-import Format from '@modstrap/format';
+import Format from "@modstrap/format";
 
-Format.card('[data-format-card]');
+Format.card("[data-format-card]");
 ```
