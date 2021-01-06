@@ -32,32 +32,51 @@ export interface FormatBytesProperties {
  * @see bytes
  */
 export declare class Format {
+    /**
+     * Default properties for a phone number.
+     *
+     * @private
+     */
     private static phoneProperties;
+    /**
+     * Default properties for date.
+     * @private
+     */
     private static dateProperties;
+    /**
+     * Default properties for time.
+     *
+     * @private
+     */
     private static timeProperties;
+    /**
+     * Default properties for number.
+     *
+     * @private
+     */
     private static numberProperties;
     /**
-     * Formats the card into a human-readable format.
+     * Formats the card number into a human-readable format.
      *
      * @param selector
      */
     static card(selector: string): void;
     /**
-     * Formats the phone into a human-readable format.
+     * Formats a phone number into a human-readable format.
      *
      * @param selector
      * @param properties
      */
     static phone(selector: string, properties?: FormatPhoneProperties): void;
     /**
-     * Formats a date into a human-readable format.
+     * Formats the date into human-readable format.
      *
      * @param selector
      * @param properties
      */
     static date(selector: string, properties?: FormatDateProperties): void;
     /**
-     * Formats time into human-readable format.
+     * Formats the time into a human-readable format.
      *
      * @param selector
      * @param properties
@@ -71,18 +90,18 @@ export declare class Format {
      */
     static number(selector: string, properties?: FormatNumberProperties): void;
     /**
-     * Formats the price into a human-readable format.
+     * Formats a string into a human-readable price format.
      *
      * @param string
      * @param properties
      */
     static price(string: string, properties?: FormatPriceProperties): string;
     /**
-     * Formats bytes into human-readable format.
+     * Formats the number of bytes into human readable format, KB, MB, etc.
      *
      * @param bytes
      * @param properties
      */
-    static bytes(bytes?: number, properties?: FormatBytesProperties): string;
+    static bytes(bytes: number, properties?: FormatBytesProperties): string;
 }
 export default Format;
