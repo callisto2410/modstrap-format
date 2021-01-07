@@ -18,7 +18,7 @@ const cleave_js_1 = __importDefault(require("cleave.js"));
  */
 class Format {
     /**
-     * Formats the card into a human-readable format.
+     * Formats the card number into a human-readable format.
      *
      * @param selector
      */
@@ -31,7 +31,7 @@ class Format {
         }
     }
     /**
-     * Formats the phone into a human-readable format.
+     * Formats a phone number into a human-readable format.
      *
      * @param selector
      * @param properties
@@ -47,7 +47,7 @@ class Format {
         }
     }
     /**
-     * Formats a date into a human-readable format.
+     * Formats the date into human-readable format.
      *
      * @param selector
      * @param properties
@@ -63,7 +63,7 @@ class Format {
         }
     }
     /**
-     * Formats time into human-readable format.
+     * Formats the time into a human-readable format.
      *
      * @param selector
      * @param properties
@@ -95,7 +95,7 @@ class Format {
         }
     }
     /**
-     * Formats the price into a human-readable format.
+     * Formats a string into a human-readable price format.
      *
      * @param string
      * @param properties
@@ -105,12 +105,12 @@ class Format {
         return string.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1" + ((_a = properties.delimiter) !== null && _a !== void 0 ? _a : " "));
     }
     /**
-     * Formats bytes into human-readable format.
+     * Formats the number of bytes into human readable format, KB, MB, etc.
      *
      * @param bytes
      * @param properties
      */
-    static bytes(bytes = 0, properties = {}) {
+    static bytes(bytes, properties = {}) {
         var _a;
         if (bytes === 0)
             return "0 B";
@@ -121,18 +121,37 @@ class Format {
     }
 }
 exports.Format = Format;
+/**
+ * Default properties for a phone number.
+ *
+ * @private
+ */
 Format.phoneProperties = {
     prefix: "+7",
     blocks: [2, 3, 3, 2, 2],
     delimiters: [" (", ") ", "-", "-"],
 };
+/**
+ * Default properties for date.
+ * @private
+ */
 Format.dateProperties = {
     delimiter: "-",
     datePattern: ["d", "m", "Y"],
 };
+/**
+ * Default properties for time.
+ *
+ * @private
+ */
 Format.timeProperties = {
     timePattern: ["h", "m"],
 };
+/**
+ * Default properties for number.
+ *
+ * @private
+ */
 Format.numberProperties = {
     delimiter: " ",
     numeralThousandsGroupStyle: "thousand",
