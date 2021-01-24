@@ -1,23 +1,53 @@
 export interface FormatPhoneProperties {
+    /**
+     * Phone number prefix, such as country code.
+     */
     prefix?: string;
+    /**
+     * Blocks of characters.
+     */
     blocks?: number[];
+    /**
+     * The delimiters for blocks.
+     */
     delimiters?: string[];
 }
 export interface FormatDateProperties {
+    /**
+     * The delimiter for blocks.
+     */
     delimiter?: string;
+    /**
+     * Pattern for the date.
+     */
     datePattern?: string[];
 }
 export interface FormatTimeProperties {
+    /**
+     * Pattern for the time.
+     */
     timePattern?: string[];
 }
 export interface FormatNumberProperties {
+    /**
+     * The delimiter for blocks.
+     */
     delimiter?: string;
+    /**
+     * Grouping style for thousands.
+     */
     numeralThousandsGroupStyle?: "lakh" | "thousand" | "wan" | "none";
 }
 export interface FormatPriceProperties {
+    /**
+     * The delimiter for blocks.
+     */
     delimiter?: string;
 }
 export interface FormatBytesProperties {
+    /**
+     * The number of digits after the dot.
+     */
     fraction?: number;
 }
 /**
