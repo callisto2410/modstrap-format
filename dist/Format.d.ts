@@ -60,6 +60,9 @@ export interface FormatBytesProperties {
  * @see number
  * @see price
  * @see bytes
+ *
+ * Github: {@link https://github.com/nosir/cleave.js}
+ * Homepage: {@link https://nosir.github.io/cleave.js/}
  */
 export declare class Format {
     /**
