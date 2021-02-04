@@ -73,8 +73,12 @@ export interface FormatBytesProperties {
  * @see price
  * @see bytes
  *
- * Github: {@link https://github.com/nosir/cleave.js}
- * Homepage: {@link https://nosir.github.io/cleave.js/}
+ * Format:
+ * [Github]{@link https://github.com/callisto2410/modstrap-format}
+ *
+ * Cleave.js:
+ * [Github]{@link https://github.com/nosir/cleave.js}
+ * [Homepage]{@link https://nosir.github.io/cleave.js/}
  */
 export class Format {
     /**
